@@ -21,7 +21,7 @@ Following sees the block analysis operation.
 
 The pseudo code above was slightly modified so that we have "single position" change to "65 positions" change in the original key, **k** to produce **k'**. This change variable, **ch** has set bit position which indicate the bit in **k** to be changed. To produce a large number of changed keys, we circular shift (1 position to left to 127 position to left) **ch**.  XOR operation of **k**  and **ch** would produce **k'**
 
-The whole idea was to find the change in the AES cipher when the key is changed by certain number of bits. We used ECB mode of AES cipher because we are concerned with only a block operation rather than on dependency of a complete sequence. Our analysis is based on a single 128-bit block of plain text.
+The whole idea was to find the change in the AES cipher when the key is changed by certain number of bits. We used ECB mode of AES cipher because we are concerned with only a block operation rather than on dependency of a complete sequence. Our analysis is based on a single 128-bit block of plain text. The source file is [here](sources/main_1.py).
 
 Analysis was done calculating histogram of hamming distance between the cipher generated using original key and cipher generated using changed key. The output diagram would have made a huge impact if the histogram was placed at different locations for different number of bits changed. In hindsight, this would have made cracking of password easier.
 
