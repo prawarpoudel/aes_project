@@ -27,7 +27,7 @@ Analysis was done calculating histogram of hamming distance between the cipher g
 
 **BUT,** the histogram are all placed at same position. This would mean that change of bits in key would produce random sequence of cipher. Following image shows the final image obtained. 
 
-![](Images/overall_histogram.png)
+![](Images/exp1/overall_histogram.png)
 
 ## Description 2
 
@@ -39,6 +39,11 @@ So, we want to move on to do another experiment where we will read a file (a sim
 
 This analysis is based on histogram computation. We will try to compare each block of cipher text generated using changed key with the cipher generated from the original key.
 
+The image that shows the histogram analysis using AES CBC is shown below:
+
+![](Images/exp2/hist_overall.png)
+
 ### Analysis 2
 
 This analysis is based on entropy computation. The goal is to see if there is any relation between the number of bits changed in key with the entropy of the cipher generated.
+
