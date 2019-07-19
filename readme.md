@@ -35,7 +35,7 @@ The above experiment does not indicate there is relation between the number of b
 
 So, we want to move on to do another experiment where we will read a file (a simple image file), and encrypt the file using AES-CBC (128) mode. We will perform two kinds of analysis in this experiment.
 
-### Analysis 1
+### Analysis 1: Done
 
 This analysis is based on histogram computation. We will try to compare each block of cipher text generated using changed key with the cipher generated from the original key.
 
@@ -43,7 +43,7 @@ The image that shows the histogram analysis using AES CBC is shown below:
 
 ![](Images/exp2/hist_overall.png)
 
-### Analysis 2
+### Analysis 2: TODO
 
 This analysis is based on entropy computation. The goal is to see if there is any relation between the number of bits changed in key with the entropy of the cipher generated.
 
