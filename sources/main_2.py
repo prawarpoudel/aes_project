@@ -88,7 +88,7 @@ def operate(infile):
 
 	return_dict = {}
 
-	my_original_cipher = aes_encrypt(key,infile,IV,128)
+	my_original_cipher = aes_encrypt(key,infile,IV)
 	my_chipher_list = list()
 
 	ch_bit_list = create_ch_bits()
@@ -119,30 +119,31 @@ def analyze_hist(dict_cipher):
 		os.mkdirs(output_dir_name)
 
 	# for every cipher created using all the keys changed
-	for comp_cipher in other_cipher:
+	for idd,comp_cipher in enumerate(other_cipher):
 		temp_list = list()
 		for idx,each_block in enumerate(ref_cipher):
 			comp_cipher_block = comp_cipher[idx]
 			temp_list.append(hamming_distance(each_block,comp_cipher_block))
 
-			plt.hist(temp_list)
-			plt.title(f"Histogram {idx} idx")
-			plt.xlim(0,128)
-			plt.ylim(0,128)
-			
-			png1 = io.BytesIO()
-			plt.savefig(png1,format="png")
-			png2 = Image.open(png1)
+		plt.hist(temp_list)
+		plt.title(f"Histogram {idx} idx")
+		plt.xlim(0,128)
+		plt.ylim(0,128)
+		
 
-			image_output_name = os.path.join(output_dir_name,f"hist_{idx}.tiff")
-			png2.save(image_output_name)
-			png1.close()
-			png2.close()
-			plt.close("all")
+		png1 = io.BytesIO()
+		plt.savefig(png1,format="png")
+		png2 = Image.open(png1)
+
+		image_output_name = os.path.join(output_dir_name,f"hist_{idd}.tiff")
+		png2.save(image_output_name)
+		png1.close()
+		png2.close()
+		plt.close("all")
 		hist_list.append(temp_list)
 
 	for each_list in hist_list:
-		plt.hist(temp_list)
+		plt.hist(each_list)
 		plt.title(f"Histogram Id idx")
 		plt.xlim(0,128)
 		plt.ylim(0,128)
