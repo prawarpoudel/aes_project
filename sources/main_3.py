@@ -96,7 +96,7 @@ def operate():
 	png2 = Image.open(png1)
 
 	if (not os.path.isdir(os.path.join("..","Images"))) or (not os.path.isdir(os.path.join("..","Images","exp3"))):
-		os.mkdir(os.path.join("..","Images","exp3"))
+		os.makedirs(os.path.join("..","Images","exp3"))
 	# image_output_name = os.path.join("..","Images",str(ch_bits)+"_histogram.tiff")
 	# change the following to .tiff if needed
 	image_output_name = os.path.join("..","Images","exp3","overall_histogram.png")	
