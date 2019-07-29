@@ -47,3 +47,13 @@ The image that shows the histogram analysis using AES CBC is shown below:
 
 This analysis is based on entropy computation. The goal is to see if there is any relation between the number of bits changed in key with the entropy of the cipher generated.
 
+## Description 3
+
+In this experiment, the encryption is performed in the same input data. However, key is varied for decryption operation and the difference in the obtained plain text` is performed.
+
+Following is the image obtained.
+
+![](Images/exp3/overall_histogram.png)
+
+Again, we can see the histogram is normally distributed. This means change in number of bits in key does not indicate closeness to the encrypted plain text.
+
