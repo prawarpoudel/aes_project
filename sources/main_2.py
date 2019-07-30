@@ -130,9 +130,9 @@ def analyze_hist(dict_cipher):
 			comp_cipher_block = comp_cipher[idx]
 			temp_list.append(hamming_distance(each_block,comp_cipher_block))
 
-	plt.hist(temp_list)
-	plt.xlim(0,128)
-	plt.ylim(0,5)
+		plt.hist(temp_list)
+		plt.xlim(0,128)
+		plt.ylim(0,5)
 		
 
 	print(f".. computing hamming distances completed\n\t.. now plotting images")
