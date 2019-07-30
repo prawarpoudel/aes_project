@@ -41,7 +41,9 @@ This analysis is based on histogram computation. We will try to compare each blo
 
 The image that shows the histogram analysis using AES CBC is shown below:
 
-![](Images/exp2/hist_overall.png)
+<<**something is wrong here, should be fixed**>>
+
+![](Images/exp2/overall_histogram.png)
 
 ### Analysis 2: TODO
 
