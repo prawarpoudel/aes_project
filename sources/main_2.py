@@ -99,7 +99,7 @@ def operate(infile):
 	for ch_bits in ch_bit_list:		
 		key_int = int.from_bytes(key,"big")
 
-		for i in range(128):
+		for i in range(127):
 			# flip one bit in key,
 			# .. generate byte type again 16-byte wide
 			key_ = (key_int^(circular_left_shift(ch_bits,i,128))).to_bytes(16,"big")
@@ -118,22 +118,21 @@ def analyze_hist(dict_cipher):
 	ref_cipher = dict_cipher["reference"]
 	other_cipher = dict_cipher["others"]
 
-	hist_list = list()
+	temp_list = list()
 
 	output_dir_name = os.path.join("..","Images","exp2")
 	if not os.path.isdir(output_dir_name):
 		os.makedirs(output_dir_name)
 
 	# for every cipher created using all the keys changed
-	for idd,comp_cipher in enumerate(other_cipher):
-		temp_list = list()
+	for idd,comp_cipher in enumerate(other_cipher):		
 		for idx,each_block in enumerate(ref_cipher):
 			comp_cipher_block = comp_cipher[idx]
 			temp_list.append(hamming_distance(each_block,comp_cipher_block))
 
-		plt.hist(temp_list)
-		plt.xlim(0,128)
-		plt.ylim(0,128)
+	plt.hist(temp_list)
+	plt.xlim(0,128)
+	plt.ylim(0,5)
 		
 
 	print(f".. computing hamming distances completed\n\t.. now plotting images")
