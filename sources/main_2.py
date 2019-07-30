@@ -132,7 +132,7 @@ def analyze_hist(dict_cipher):
 
 		plt.hist(temp_list)
 		plt.xlim(0,128)
-		plt.ylim(0,5)
+		plt.ylim(0,128)
 		
 
 	print(f".. computing hamming distances completed\n\t.. now plotting images")
