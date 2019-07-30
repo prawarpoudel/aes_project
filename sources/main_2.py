@@ -1,4 +1,5 @@
 import os
+import os.path
 import io
 import sys
 import random
@@ -32,7 +33,7 @@ def create_ch_bits():
 	# This section populates the list which is used to determine the 
 	# .. change in bits
 	ch_bit_list = list()
-	for num_bits in range(1,(int)(128//2)+1,1):
+	for num_bits in range(1,(int)(128//8)+1,1):
 		ch_bits = 1
 		for b_idx in range(num_bits,1,-1):
 			ch_bits = (ch_bits*10)+1
@@ -77,6 +78,7 @@ def aes_encrypt(key,file_name,iv,num_bits=16*8):
 	return my_enc_list
 
 def operate(infile):
+	print(f"..Encrypting starting..")
 	if not os.path.isfile(infile):
 		print(f"Input image file \"{infile}\" does not exist")
 		print(f".. program exiting")
@@ -106,9 +108,13 @@ def operate(infile):
 
 	return_dict['reference'] = my_original_cipher
 	return_dict['others'] = my_chipher_list
+
+	print(f".. encrypting finished")
 	return return_dict
 
 def analyze_hist(dict_cipher):
+	print(f"Now calculating hamming distances..")
+
 	ref_cipher = dict_cipher["reference"]
 	other_cipher = dict_cipher["others"]
 
@@ -116,7 +122,7 @@ def analyze_hist(dict_cipher):
 
 	output_dir_name = os.path.join("..","Images","exp2")
 	if not os.path.isdir(output_dir_name):
-		os.mkdirs(output_dir_name)
+		os.makedirs(output_dir_name)
 
 	# for every cipher created using all the keys changed
 	for idd,comp_cipher in enumerate(other_cipher):
@@ -126,34 +132,27 @@ def analyze_hist(dict_cipher):
 			temp_list.append(hamming_distance(each_block,comp_cipher_block))
 
 		plt.hist(temp_list)
-		plt.title(f"Histogram {idx} idx")
 		plt.xlim(0,128)
 		plt.ylim(0,128)
 		
 
-		png1 = io.BytesIO()
-		plt.savefig(png1,format="png")
-		png2 = Image.open(png1)
-
-		image_output_name = os.path.join(output_dir_name,f"hist_{idd}.tiff")
-		png2.save(image_output_name)
-		png1.close()
-		png2.close()
-		plt.close("all")
-		hist_list.append(temp_list)
-
-	for each_list in hist_list:
-		plt.hist(each_list)
-		plt.title(f"Histogram Id idx")
-		plt.xlim(0,128)
-		plt.ylim(0,128)
-		
-	plt.savefig("hist_overall.png")
-	plt.close("all")
+	print(f".. computing hamming distances completed\n\t.. now plotting images")
+	png1 = io.BytesIO()
+	plt.savefig(png1,format="png")
+	png2 = Image.open(png1)
+	# change thet following to tiff if needed
+	image_output_name = os.path.join(output_dir_name,"overall_histogram.png")
+	png2.save(image_output_name)
+	png1.close()
+	png2.close()
+	
 
 def main(input_image_name="overall_histogram.png"):
 	input_image = os.path.join("..","Images","exp1",input_image_name)
 	print(f"Provided input image name is {input_image}")
+	if not os.path.exists(input_image):
+		print(f".. not found")
+		return
 	cipher_dict = operate(input_image)
 
 	analyze_hist(cipher_dict)
