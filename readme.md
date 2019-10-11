@@ -33,7 +33,7 @@ Analysis was done calculating histogram of hamming distance between the cipher g
 
 The above experiment does not indicate there is relation between the number of bits that are different in key vs the generated cipher.
 
-So, we want to move on to do another experiment where we will read a file (a simple image file), and encrypt the file using AES-CBC (128) mode. We will perform two kinds of analysis in this experiment.
+So, we want to move on to do another experiment where we will read a file (a simple image file), and encrypt the file using AES-CBC (128) mode.
 
 ## Description 3
 
